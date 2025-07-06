@@ -1,0 +1,28 @@
+name: Terraform Format & Validate
+
+on:
+  push:
+    paths:
+      - 'infrastructure/**.tf'
+  pull_request:
+    paths:
+      - 'infrastructure/**.tf'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Format
+      run: terraform fmt -check -recursive
+      working-directory: ./infrastructure
+
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: ./infrastructure
