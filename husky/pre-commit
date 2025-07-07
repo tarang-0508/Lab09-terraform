@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "🔍 Running terraform fmt and validate..."
+
+terraform fmt -check -recursive
+terraform validate
+
+echo "✅ Husky check passed!"
